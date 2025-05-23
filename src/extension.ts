@@ -1,26 +1,34 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  const disposable = vscode.commands.registerCommand('core-game-visualizer.visualizer', () => {
+    const panel = vscode.window.createWebviewPanel(
+      'visualizer', // Identifies the type of the webview. Used internally
+      'CORE GAME Visualizer',       // Title of the panel displayed to the user
+      vscode.ViewColumn.One, // Editor column to show the new webview panel in
+      {} // Webview options. More on these later.
+    );
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "core-game-visualizer" is now active!');
+    // Set the webview's HTML content
+    panel.webview.html = getWebviewContent();
+  });
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('core-game-visualizer.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from core-game-visualizer!');
-	});
-
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
+function getWebviewContent() {
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Hello World</title>
+    </head>
+    <body>
+      <h1>Hello World</h1>
+    </body>
+    </html>
+  `;
+}
+
 export function deactivate() {}

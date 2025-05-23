@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "core-game-visualizer.helloWorld",
-        "title": "Hello World"
+        "command": "core-game-visualizer.visualizer",
+        "title": "CORE GAME Visualizer"
       }
     ]
   },
